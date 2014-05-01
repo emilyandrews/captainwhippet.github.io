@@ -1,4 +1,4 @@
-captainwhippet.github.io
+captainwhippet.com
 ========================
 
 Hello, welcome to my site.
