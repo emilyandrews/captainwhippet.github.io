@@ -1,4 +1,6 @@
 captainwhippet.github.io
 ========================
 
-My site
+Hello, welcome to my site.
+
+Something interesting might appear here soon.
