@@ -3,4 +3,4 @@ captainwhippet.com
 
 Hello, welcome to my site.
 
-Something interesting might appear here soon.
+Something might appear here soon.
