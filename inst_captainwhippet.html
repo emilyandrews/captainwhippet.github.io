@@ -4,22 +4,21 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
 	<script type="text/javascript" src="javascripts/instafeed.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
     <title>captainwhippet.com by captainwhippet</title>
 
-	<script type="text/javascript">
-	    var userFeed = new Instafeed({
-	        get: 'user',
-	        userId: 8665914,
-	        accessToken: '8665914.467ede5.4354bcfe9ffa4a2bb4df05ecbc5f9872',
-	        useHttp: true
-	    });
-	    userFeed.run();
-	</script>
+	<style type="text/css">
+		div.a {
+			width: 50px;
+			height:50px;
+			 background-color:red;
+			position:fixed;			    
+			}
+	</style>
 
   </head>
 
@@ -60,4 +59,53 @@
 
     
   </body>
+
+<script type="text/javascript">
+	
+
+	$(document).ready(function(){
+	    var userFeed = new Instafeed({
+	        get: 'user',
+	        userId: 8665914,
+	        accessToken: '8665914.467ede5.4354bcfe9ffa4a2bb4df05ecbc5f9872',
+	        useHttp: true,
+	        template: '<a href="{{link}}" style="position: absolute"><img src="{{image}}" /></a>',
+	        after: animateInstapics
+	    });
+	    userFeed.run();
+	});
+
+
+	function animateInstapics(){	
+		$('#instafeed').find("a").each(function () {
+			    var element = $(this);
+			    (function(){
+				    var newq = makeNewPosition();
+				    var oldq = element.offset();
+				    var speed = calcSpeed([oldq.top, oldq.left], newq);
+			        element.animate({ top: newq[0], left: newq[1] }, speed, arguments.callee);
+			    }());
+			});
+	}
+
+	function makeNewPosition(){
+	    // Get viewport dimensions (remove the dimension of the div)
+	    var h = $(window).height() - 50;
+	    var w = $(window).width() - 50;
+	    var nh = Math.floor(Math.random() * h);
+	    var nw = Math.floor(Math.random() * w);
+	    return [nh,nw];    
+	}
+
+	function calcSpeed(prev, next) {
+	    var x = Math.abs(prev[1] - next[1]);
+	    var y = Math.abs(prev[0] - next[0]);
+	    var greatest = x > y ? x : y;
+	    var speedModifier = Math.floor(Math.random() * 0.05) + 0.05;
+	    var speed = Math.ceil(greatest/speedModifier);
+	    return speed;
+	}
+
+</script>
+
 </html>
